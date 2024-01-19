@@ -1,11 +1,5 @@
 <template>
-    <div>test</div>
+    <div class="nav">
+        <button></button>
+    </div>
 </template>
-
-<style scoped>
-
-</style>
-
-<script setup>
-
-</script>
