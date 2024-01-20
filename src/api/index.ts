@@ -7,7 +7,11 @@ export const API = axios.create({
 });
 
 export interface APIError {
-  message: string
-  error: string
-  statusCode: number
+  message: string;
+  error: string;
+  statusCode: number;
+}
+
+export function isAPIError(data: any): data is APIError {
+  return ("mesage" in data && "error" in data && "statusCode" in data);
 }

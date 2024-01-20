@@ -1,21 +1,34 @@
 import { defineStore } from "pinia";
-import { API } from "../api";
+import { API, APIError, isAPIError } from "../api";
 import { LoginRequest, LoginResponse } from "../api/login";
-import { AxiosResponse } from "axios";
+import { AxiosResponse, isAxiosError } from "axios";
 
-interface UserState {}
+interface UserState {
+  error: APIError | null
+}
 
 export const useUserStore = defineStore("user", {
   state: (): UserState => {
-    return {};
+    return {
+      error: null
+    };
   },
 
   getters: {},
 
   actions: {
     async login(email: string, password: string) {
-      const res = await API.post<LoginRequest,AxiosResponse<LoginResponse>>("/login", { email, password });
-      console.log(res);
-    }
+      try {
+        const res = await API.post<
+          LoginRequest,
+          AxiosResponse<LoginResponse | APIError>
+        >("/auth/login", { email, password });
+      } catch (e) {
+        if (isAxiosError(e) && isAPIError(e.response?.data)) {
+          this.$state.error = e.response?.data;
+          console.log(this.$state.error);
+        }
+      }
+    },
   },
 });
