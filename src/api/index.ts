@@ -13,5 +13,5 @@ export interface APIError {
 }
 
 export function isAPIError(data: any): data is APIError {
-  return ("mesage" in data && "error" in data && "statusCode" in data);
+  return ("message" in data && "error" in data && "statusCode" in data);
 }

@@ -25,8 +25,8 @@ export const useUserStore = defineStore("user", {
         >("/auth/login", { email, password });
       } catch (e) {
         if (isAxiosError(e) && isAPIError(e.response?.data)) {
-          this.$state.error = e.response?.data;
-          console.log(this.$state.error);
+          this.error = e.response?.data;
+          console.log(this.error);
         }
       }
     },
