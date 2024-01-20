@@ -1,5 +1,14 @@
 <template>
   <div class="nav">
-    <button></button>
+    <button v-on:click="onLogin"></button>
   </div>
 </template>
+
+<script setup>
+import { useUserStore } from "../stores/user";
+const userStore = useUserStore();
+
+function onLogin() {
+  userStore.login("admin@DVALight.com", "invalid").then(() => {});
+}
+</script>

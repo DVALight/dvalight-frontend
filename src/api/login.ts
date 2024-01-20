@@ -1,16 +1,16 @@
 import { User } from "./user";
 
 export interface LoginRequest {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
 export interface Tokens {
-  accesseToken: string
-  refreshToken: string
+  accesseToken: string;
+  refreshToken: string;
 }
 
 export interface LoginResponse {
-  user: User
-  tokens: Tokens
+  user: User;
+  tokens: Tokens;
 }
