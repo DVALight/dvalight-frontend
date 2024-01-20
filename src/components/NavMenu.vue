@@ -9,6 +9,6 @@ import { useUserStore } from "../stores/user";
 const userStore = useUserStore();
 
 function onLogin() {
-  userStore.login("admin@DVALight.com", "invalid").then(() => {});
+  userStore.login("admin@DVALight.com", "admin").then(() => {});
 }
 </script>

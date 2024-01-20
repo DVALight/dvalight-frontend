@@ -14,3 +14,7 @@ export interface LoginResponse {
   user: User;
   tokens: Tokens;
 }
+
+export function isLoginResponse(data: any): data is LoginResponse {
+  return ("user" in data && "tokens" in data);
+}
