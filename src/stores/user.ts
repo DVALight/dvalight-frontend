@@ -1,18 +1,13 @@
 import { defineStore } from "pinia";
 
-interface UserState {
-}
+interface UserState {}
 
-export const useUserStore = defineStore('user', {
-    state: (): UserState => {
-        return {}
-    },
+export const useUserStore = defineStore("user", {
+  state: (): UserState => {
+    return {};
+  },
 
-    getters: {
+  getters: {},
 
-    },
-
-    actions: {
-
-    }
+  actions: {},
 });
