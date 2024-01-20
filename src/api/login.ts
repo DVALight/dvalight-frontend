@@ -8,6 +8,7 @@ export interface LoginRequest {
 export interface Tokens {
   accesseToken: string;
   refreshToken: string;
+  expiresIn: number;
 }
 
 export interface LoginResponse {
