@@ -12,6 +12,7 @@
     "@radial-color-picker/rotator": "^3.0.2",
     "@radial-color-picker/vue-color-picker": "^5.0.1",
     "axios": "^1.6.5",
+    "axios-jwt": "^4.0.0",
     "pinia": "^2.1.7",
     "vue": "^3.3.11"
   },
