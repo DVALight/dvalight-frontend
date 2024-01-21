@@ -21,7 +21,7 @@ export function isAPIError(data: any): data is APIError {
 const requestRefresh: TokenRefreshRequest = async (refreshToken: string): Promise<IAuthTokens | string> => {
   const res = await axios.post<{}, AxiosResponse<Tokens>>(`${API_BASE_URL}/auth/refresh`, {}, {
     headers: {
-      "Authorization": "Refresh " + refreshToken
+      "Authorization": `Refresh ${refreshToken}`
     }
   });
 
