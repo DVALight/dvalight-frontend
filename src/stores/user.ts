@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { API, APIError, isAPIError } from "../api";
-import { LoginRequest, LoginResponse, isLoginResponse } from "../api/login";
+import { LoginRequest, LoginResponse, isLoginResponse } from "../api/auth";
 import { AxiosResponse, isAxiosError } from "axios";
 import { User } from "../api/user";
 
