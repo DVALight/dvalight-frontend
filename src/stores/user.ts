@@ -3,6 +3,7 @@ import { API, APIError, isAPIError } from "../api";
 import { LoginRequest, LoginResponse, isLoginResponse } from "../api/auth";
 import { AxiosResponse, isAxiosError } from "axios";
 import { User } from "../api/user";
+import { setAuthTokens } from "axios-jwt";
 
 interface UserState {
   error: APIError | null
@@ -29,6 +30,11 @@ export const useUserStore = defineStore("user", {
 
         if (isLoginResponse(res.data)) {
           this.user = res.data.user;
+          setAuthTokens({
+            accessToken: res.data.tokens.accesseToken,
+            refreshToken: res.data.tokens.refreshToken
+          });
+
           console.log(res.data.tokens);
         }
       } catch (e) {
