@@ -61,12 +61,14 @@ const device = computed(() => {
 
 //let lState = ref(0);
 let color = ref("rgb(255,0,0)");
-let isDisabledRCP = ref(true);
 
 const styleObject = computed(() => ({
   "--active-color": color.value,
   "--lights-state": device.value ? device.value.state : false,
 }));
+const isDisabledRCP = computed(() => {
+  return device.value ? !device.value.state : true;
+})
 
 onMounted(() => {
   deviceStore.fetchDevice(1).then(() => console.log("fetch device"));
@@ -77,7 +79,7 @@ function onPower() {
   deviceStore.setDeviceState(isCheckedPwr.value ? true : false).then(() => {
     //lState.value = isCheckedPwr.value ? 1 : 0;
     console.log(device.value.state);
-    isDisabledRCP.value = !device.value.state;
+    //isDisabledRCP.value = !device.value.state;
     selectedMode.value = null;
   });
 }
@@ -87,6 +89,10 @@ function onColorSelect(value) {
   color.value = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
 
   // code to set the color
+  const colorNumber = (rgb[0] << 16) | (rgb[1] << 8) | rgb[2];
+  deviceStore.setDeviceColor(colorNumber).then(() => {
+    console.log(device.value.color);
+  });
 }
 
 const selectMode = (mode) => {

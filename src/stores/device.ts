@@ -48,6 +48,13 @@ export const useDeviceStore = defineStore("device", {
         this.device.state = state;
         await this.updateDevice();
       }
+    },
+
+    async setDeviceColor(color: number) {
+      if (this.device) {
+        this.device.color = color;
+        await this.updateDevice();
+      }
     }
   }
 });
