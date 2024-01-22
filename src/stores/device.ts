@@ -15,7 +15,7 @@ export const useDeviceStore = defineStore("device", {
   },
 
   getters: {
-    device: (state: DeviceState): Device | null => state.device
+    getDevice: (state: DeviceState): Device | null => state.device
   },
 
   actions: {
@@ -40,6 +40,13 @@ export const useDeviceStore = defineStore("device", {
         console.log(res.data);
       } catch (e) {
         console.log(e);
+      }
+    },
+
+    async setDeviceState(state: boolean) {
+      if (this.device) {
+        this.device.state = state;
+        await this.updateDevice();
       }
     }
   }

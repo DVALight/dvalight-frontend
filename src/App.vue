@@ -45,28 +45,41 @@
 <script setup>
 import NavMenu from "./components/NavMenu.vue";
 import Footer from "./components/Footer.vue";
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
+import { useDeviceStore } from "./stores/device";
+const deviceStore = useDeviceStore();
 
 const MODES = ["1H", "4H", "2H", "8H"];
 const selectedMode = ref(null);
+
+const isCheckedPwr = ref();
+const h = ref(0), s = 1, l = 0.5;
+
+const device = computed(() => {
+  return deviceStore.getDevice;
+});
+
+//let lState = ref(0);
+let color = ref("rgb(255,0,0)");
+let isDisabledRCP = ref(true);
+
 const styleObject = computed(() => ({
   "--active-color": color.value,
-  "--lights-state": lState.value,
+  "--lights-state": device.value ? device.value.state : false,
 }));
-const isCheckedPwr = ref();
-const h = ref(0),
-  s = 1,
-  l = 0.5;
-let isDisabledRCP = true;
-let lState = ref(0);
-let color = ref("rgb(255,0,0)");
+
+onMounted(() => {
+  deviceStore.fetchDevice(1).then(() => console.log("fetch device"));
+});
 
 function onPower() {
-  lState.value = isCheckedPwr.value ? 1 : 0;
-  isDisabledRCP = !isCheckedPwr.value;
-  selectedMode.value = null;
-
   // code to turn on/off
+  deviceStore.setDeviceState(isCheckedPwr.value ? true : false).then(() => {
+    //lState.value = isCheckedPwr.value ? 1 : 0;
+    console.log(device.value.state);
+    isDisabledRCP.value = !device.value.state;
+    selectedMode.value = null;
+  });
 }
 
 function onColorSelect(value) {
